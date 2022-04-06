@@ -120,7 +120,7 @@ ko:
 
 	# rekor-cli
 	LDFLAGS="$(CLI_LDFLAGS)" GIT_HASH=$(GIT_HASH) GIT_VERSION=$(GIT_VERSION) \
-	ko publish --base-import-paths \
+	ko build --base-import-paths \
 		--platform=all --tags $(GIT_VERSION) --tags $(GIT_HASH) \
 		--image-refs rekorCliImagerefs github.com/sigstore/rekor/cmd/rekor-cli
 
@@ -152,10 +152,10 @@ ko-local:
 .PHONY: ko-trillian
 ko-trillian:
 	LDFLAGS="$(SERVER_LDFLAGS)" GIT_HASH=$(GIT_HASH) GIT_VERSION=$(GIT_VERSION) \
-	ko publish --base-import-paths \
+	ko build --base-import-paths \
 		--platform=all --tags $(GIT_VERSION) --tags $(GIT_HASH) \
 		--image-refs trillianSignerImagerefs github.com/google/trillian/cmd/trillian_log_signer
-	ko publish --base-import-paths \
+	ko build --base-import-paths \
 		--platform=all --tags $(GIT_VERSION) --tags $(GIT_HASH) \
 		--image-refs trillianServerImagerefs github.com/google/trillian/cmd/trillian_log_server
 
