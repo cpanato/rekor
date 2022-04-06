@@ -114,15 +114,15 @@ debug:
 ko:
 	# rekor-server
 	LDFLAGS="$(SERVER_LDFLAGS)" GIT_HASH=$(GIT_HASH) GIT_VERSION=$(GIT_VERSION) \
-	ko resolve --base-import-paths \
+	KO_DOCKER_REPO=$(KO_PREFIX)/rekor-server ko resolve --bare \
 		--platform=all --tags $(GIT_VERSION) --tags $(GIT_HASH) \
-		--filename config/ > $(REKOR_YAML)
+		--image-refs rekorServerImagerefs --filename config/ > $(REKOR_YAML)
 
 	# rekor-cli
 	LDFLAGS="$(CLI_LDFLAGS)" GIT_HASH=$(GIT_HASH) GIT_VERSION=$(GIT_VERSION) \
 	ko publish --base-import-paths \
 		--platform=all --tags $(GIT_VERSION) --tags $(GIT_HASH) \
-		github.com/sigstore/rekor/cmd/rekor-cli
+		--image-refs rekorCliImagerefs github.com/sigstore/rekor/cmd/rekor-cli
 
 deploy:
 	LDFLAGS="$(SERVER_LDFLAGS)" GIT_HASH=$(GIT_HASH) GIT_VERSION=$(GIT_VERSION) ko apply -f config/
@@ -154,11 +154,10 @@ ko-trillian:
 	LDFLAGS="$(SERVER_LDFLAGS)" GIT_HASH=$(GIT_HASH) GIT_VERSION=$(GIT_VERSION) \
 	ko publish --base-import-paths \
 		--platform=all --tags $(GIT_VERSION) --tags $(GIT_HASH) \
-		github.com/google/trillian/cmd/trillian_log_signer
+		--image-refs trillianSignerImagerefs github.com/google/trillian/cmd/trillian_log_signer
 	ko publish --base-import-paths \
 		--platform=all --tags $(GIT_VERSION) --tags $(GIT_HASH) \
-		github.com/google/trillian/cmd/trillian_log_server
-
+		--image-refs trillianServerImagerefs github.com/google/trillian/cmd/trillian_log_server
 
 ## --------------------------------------
 ## Tooling Binaries
