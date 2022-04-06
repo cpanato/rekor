@@ -61,7 +61,7 @@ steps:
     - '-c'
     - |
       gcloud auth configure-docker \
-      make release
+      && make release
 
 - name: gcr.io/cloud-builders/docker
   entrypoint: 'bash'

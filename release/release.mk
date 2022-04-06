@@ -5,7 +5,7 @@
 # used when releasing together with GCP CloudBuild
 .PHONY: release
 release:
-	CLIENT_LDFLAGS="$(CLI_LDFLAGS)" SERVER_LDFLAGS="$(SERVER_LDFLAGS)" goreleaser release
+	CLIENT_LDFLAGS="$(CLI_LDFLAGS)" SERVER_LDFLAGS="$(SERVER_LDFLAGS)" goreleaser release --rm-dist --timeout 60m
 
 # used when need to validate the goreleaser
 .PHONY: snapshot
