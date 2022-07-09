@@ -25,16 +25,16 @@ TOOLS_DIR := hack/tools
 TOOLS_BIN_DIR := $(abspath $(TOOLS_DIR)/bin)
 BIN_DIR := $(abspath $(ROOT_DIR)/bin)
 
-PROJECT_ID ?= projectsigstore
+PROJECT_ID ?= cpanato-general
 RUNTIME_IMAGE ?= gcr.io/distroless/static
 # Set version variables for LDFLAGS
 GIT_VERSION ?= $(shell git describe --tags --always --dirty)
 GIT_HASH ?= $(shell git rev-parse HEAD)
 
-KO_PREFIX ?= gcr.io/projectsigstore
+KO_PREFIX ?= gcr.io/cpanato-general
 export KO_DOCKER_REPO=$(KO_PREFIX)
 REKOR_YAML ?= rekor-$(GIT_VERSION).yaml
-GHCR_PREFIX ?= ghcr.io/sigstore/rekor
+GHCR_PREFIX ?= ghcr.io/cpanato/rekor
 GOBIN ?= $(shell go env GOPATH)/bin
 
 # Binaries
